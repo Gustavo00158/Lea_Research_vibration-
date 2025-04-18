@@ -1,0 +1,32 @@
+import matplotlib.pyplot as plt
+import numpy as np
+from skimage import data
+
+# Carregar uma imagem de exemplo da biblioteca skimage
+imagem = data.coins()  # Imagem de moedas em escala de cinza
+
+# Exibir a imagem original
+plt.figure(figsize=(6, 6))
+plt.imshow(imagem, cmap="gray")
+plt.title("Imagem Original")
+plt.colorbar()
+plt.show()
+
+# Mostrar a matriz de pixels
+imagem_array = np.array(imagem)
+print("Matriz de pixels da imagem:\n", imagem_array)
+
+# Criar a representação da imagem como um sinal 3D
+x = np.arange(imagem.shape[1])
+y = np.arange(imagem.shape[0])
+X, Y = np.meshgrid(x, y)
+
+fig = plt.figure(figsize=(8, 6))
+ax = fig.add_subplot(111, projection='3d')
+ax.plot_surface(X, Y, imagem, cmap="viridis")
+
+ax.set_xlabel("X (largura)")
+ax.set_ylabel("Y (altura)")
+ax.set_zlabel("Intensidade")
+ax.set_title("Imagem representada como sinal 2D")
+plt.show()
